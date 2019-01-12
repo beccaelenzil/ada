@@ -26,35 +26,71 @@
 #3. add more copies
 
 class Book
+  # generate reader methods for all instance variables
+  attr_accessor :title, :author, :description, :call_num, :year_published, :checked_out_by, :checked_out_by_currently, :copies_available
+
   # Constructor! This will be called automatically when you invoke Book.new
   def initialize(title, author, description, call_num, year_published)
-    @name = name
+    @title = title
     @author = author
     @description = description
-    @call_num: call_num,
-    @year_published: year_published,
-    copies_available: 3,
-    checked_out_by_currently: []
-    checked_out_by: []
+    @call_num = call_num,
+    @year_published = year_published,
+    @copies_available = 3,
+    @checked_out_by_currently = []
+    @checked_out_by = []
   end
 
   # check-out --> add name from checked_out_by_currently array and subtract 1 from the number available
   def checkout(name)
-    if self.checked_out_by.include?(name) == false
-      self.checked_out_by << name
+    if @checked_out_by.include?(name) == false
+      @checked_out_by << name
     end
-    self.checked_out_by_currently << name
-    self.copies_available -= 1
+    @checked_out_by_currently << name
+    @copies_available -= 1
   end
 
   # check-in --> remove name from checked_out_by_currently array and add one to the number available
   def checkin(name)
-    self.checked_out_by_currently.delete(name)
-    self.copies_available += 1
+    @checked_out_by_currently.delete(name)
+    @copies_available += 1
   end
 
   # add coppis
   def add_copies(num)
-    self.copies_available += num
+    @copies_available += num
   end
 end
+
+sorcers_stone = Book.new({
+  title: "Harry Potter and the Sorcer's Stone",
+  author: "J. K. Rowling",
+  description: "Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School for Witchcraft and Wizardry.",
+  call_num: "823.914R797",
+  year_published: 1998,
+  copies_available: 3,
+  checked_out_by: []
+  })
+
+puts sorcers_stone.title
+# will output "Harry Potter and the Sorcer's Stone" in terminal
+
+sorcers_stone.checkout("Dee")
+sorcers_stone.checkout("Cedrick")
+
+puts sorcers_stone.checked_out_by
+# will output "Dee" and "Cedrick" to the terminal
+
+puts sorcers_stone.copies_available
+# will output "1" to the terminal
+
+sorcers_stone.add_copies(3)
+puts sorcers_stone.copies_available
+# will output "4" to the terminal
+
+sorcers_stone.checkin("Cedrick")
+puts sorcers_stone.checked_out_by
+# will output "Dee"
+
+puts sorcers_stone.copies_available
+# will output "5"
