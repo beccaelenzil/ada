@@ -115,6 +115,17 @@ class Flower
 
 end
 ```
+## Test reader
+
+```ruby
+puts lily.name
+puts lily.size
+puts lily.color
+puts lily.quantity_available
+puts lily.bundles
+puts lily.max_stock
+puts lily.total_sold
+```
 
 # Method: sell
 
@@ -165,4 +176,181 @@ class Flower
 end
 ```
 
+## test sell
+```ruby
 
+# sell method
+# sell more than quantity available
+puts "--sell 500--"
+lily.sell(500)
+puts "quantitye available: #{lily.quantity_available}"
+# sell an available quantity
+puts "--sell 50--"
+lily.sell(50)
+puts "quantitye available: #{lily.quantity_available}"
+
+```
+
+
+# Method: restock
+
+- Find the difference between the ```max_stock``` and ```quantatiy_availble```
+- Check if this different is greater than a ```bundle```
+- If it is, 
+	- divide the difference by ```bundles``` (int division)
+	- Mutliply this value (number of bundles) by ```bundles```
+	- add this value to quantity_available
+- If not,
+	- tell the user they can't order anymore because they already have close to the max stock
+
+```ruby
+
+class Flower
+	# generate reader methods for all instance variables
+	attr_accessor :name, :size, :color, :quantity_available, :bundles, :max_stock, :total_sold
+
+	# Constructor! This will be called automatically when you invoke Flower.new
+	def initialize(flower_hash)
+	    @name = flower_hash[:name]
+	    @size = flower_hash[:size]
+	    @color = flower_hash[:color]
+	    @quantity_available = flower_hash[:quantity_available]
+	    @bundles = flower_hash[:bundles]
+	    @max_stock = flower_hash[:max_stock]
+	    @total_sold = flower_hash[:total_sold]
+	end
+	
+	# sell some number (num) of flowers
+  def sell(num)
+	  if num <= @quantity_available
+	  	# update quantity_available and total sold
+	  	#@quantatiy_available = @quantatiy_available - num
+	  	@quantatiy_available -= num
+	  	@total_sold += num
+	  else
+	  	# sell the remaining and tell user they don't have enough
+	  	puts "You only have #{@quantatiy_available}. We sold them all"
+	  	@quantatiy_available = 0
+	  end
+  end
+	
+
+	# create a restock method that restocks as close to the max stock as possible
+	def restock
+    diff = @max_stock - @quantity_available
+    if diff >= @bundles
+      num_bundles = diff/(@bundles)
+      num_flowers = num_bundles * @bundles
+      @quantity_available += num_flowers
+    else
+      puts "It's not time to restock yet. "
+      puts "You have #{@quantity_available}, and the max stock is #{@max_stock}"
+      puts "You need to wait until you can order a bundle of #{@bundles}"
+    end
+  end
+
+
+end
+
+```
+
+## test restock
+
+```ruby
+
+#restock method
+puts "--restock--"
+lily.restock
+puts "quantitye available: #{lily.quantity_available}"
+
+#restock when not time to restock
+puts "--restock--"
+lily.restock
+
+```
+
+# The whole class and tests
+```ruby
+class Flower
+  # generate reader methods for all instance variables
+  attr_accessor :name, :size, :color, :quantity_available, :bundles, :max_stock, :total_sold
+
+  # Constructor! This will be called automatically when you invoke Flower.new
+  # -- use keyword arguements
+  def initialize(flower_hash)
+    @name = flower_hash[:name]
+    @size = flower_hash[:size]
+    @color = flower_hash[:color]
+    @quantity_available = flower_hash[:quantity_available]
+    @bundles = flower_hash[:bundles]
+    @max_stock = flower_hash[:max_stock]
+    @total_sold = flower_hash[:total_sold]
+  end
+
+  # sell some number (num) of flowers
+  def sell(num)
+    if num <= @quantity_available
+      @total_sold += num
+      @quantity_available -= num
+    else
+      puts "You don't have enough flowers to sell that many."
+    end
+  end
+
+  # restock up to max_stock
+  def restock
+    diff = @max_stock - @quantity_available
+    if diff >= @bundles
+      num_bundles = diff/(@bundles)
+      num_flowers = num_bundles * @bundles
+      @quantity_available += num_flowers
+    else
+      puts "It's not time to restock yet. "
+      puts "You have #{@quantity_available}, and the max stock is #{@max_stock}"
+      puts "You need to wait until you can order a bundle of #{@bundles}"
+    end
+  end
+end
+
+
+#--tests--
+#attributes
+puts "--Insantiate new Flower and view instance attributes--"
+
+#lily = Flower.new("Lily","medium","white", 91, 24, 120, 9200)
+lily = Flower.new({:name=>"Lily",:size=>"medium",:color=>"white", :quantity_available=>91, :bundles=>24, :max_stock=>120, :total_sold=>9200})
+puts lily.name
+puts lily.size
+puts lily.color
+puts lily.quantity_available
+puts lily.bundles
+puts lily.max_stock
+puts lily.total_sold
+
+# sell method
+# sell more than quantity available
+puts "--sell 500--"
+lily.sell(500)
+puts "quantitye available: #{lily.quantity_available}"
+# sell an available quantity
+puts "--sell 50--"
+lily.sell(50)
+puts "quantitye available: #{lily.quantity_available}"
+
+#restock method
+puts "--restock--"
+lily.restock
+puts "quantitye available: #{lily.quantity_available}"
+
+#restock when not time to restock
+puts "--restock--"
+lily.restock
+
+
+```
+# Enhancements?
+
+What other methods might you write?
+
+* Summary
+* Price information - total revenue
