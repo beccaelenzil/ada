@@ -41,29 +41,31 @@ class Flower
       #@quantity_available = @quantity_available - num
       @quantity_available -= num
       @total_sold += num
+      sold = num
     else
       puts "You don't have #{num} flowers. You only have #{@quantity_available}. We will sell them"
+      sold = @quantity_available
       @total_sold += @quantity_available
       @quantity_available = 0
     end
+    return sold
   end
 
   # restock method
   def restock
     # find difference between quantity_available and max_stock
     difference = @max_stock - @quantity_available
-    if difference >= @bundles
     # determine the number of bundles
-      num_bundles = difference / @bundles
+    num_bundles = (difference / @bundles).floor
     # determine the number of flowers
-      num_flowers = @bundles * num_bundles
-      @quantity_available += num_flowers
-    else
-      puts "You have too many flowers to restock at this time"
-    end
+    num_flowers = @bundles * num_bundles
+    @quantity_available += num_flowers
+    return num_bundles
   end
 
 end
+
+
 
 #---tests----
 #initialize method - write 7 attributes
@@ -108,3 +110,28 @@ puts "quantity_available: #{rose.quantity_available}"
 puts "call restock"
 rose.restock
 puts "quantity_available: #{rose.quantity_available}"
+
+=begin
+flower_dictionaries = [{name: "Lily", size: "medium",	color: "white",	quantity_available: 91, bundles: 20,	max_stock: 120, total_sold: 9241},
+{name: "Tulip",	size: "medium",	color:"yellow",	quantity_available: 179,	bundles: 30,	max_stock: 250,	total_sold: 8350},
+{name: "Tulip",	size: "medium",	color:"purple",	quantity_available: 52,	bundles: 30,	max_stock: 100,	total_sold: 2558},
+{name: "Daisy",	size: "medium",	color:"White",	quantity_available: 15,	bundles: 50,	max_stock: 300,	total_sold: 14839}]
+
+flowers = []
+flowers.push(rose)
+
+flower_dictionaries.each do |flower_dict|
+  flowers.push(Flower.new(flower_dict))
+end
+
+def automatically_restock(array_of_flowers)
+  array_of_flowers.each do |flower|
+    if flower.quantity_available < flower.bundles
+      flower.restock
+      puts "We restocked the #{flower.name}s"
+    end
+  end
+end
+
+automatically_restock(flowers)
+=end

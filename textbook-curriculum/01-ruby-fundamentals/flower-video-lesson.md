@@ -98,19 +98,9 @@ Now let's code this.
 def sell(num)
     if num <= @quantity_available
       #@quantity_available = @quantity_available - num
-      @quantity_available -= num
-      @total_sold += num
-    else
-      puts "You don't have #{num} flowers. You only have #{@quantity_available}. We will sell them"
-      @total_sold += @quantity_available
-      @quantity_available = 0
-    end
-end
 ```
 
-...
-
-You may have written
+You may have also written
 
 ```ruby
 @quantity_available = @quantity_available - 1
@@ -120,8 +110,32 @@ or this may look unfarmiliar to you.
 Let's rewrite this with the ```-=``` operator.
 
 ```ruby
-@quantity_available -= 1
+@quantity_available -= num
 ```
+Ok, let's carry on
+
+```ruby
+      @quantity_available -= num
+      @total_sold += num
+      flowers_sold = num
+    else
+      puts "You don't have #{num} flowers. You only have #{@quantity_available}. We will sell them"
+      flowers_sold = @quantity_available
+      @total_sold += @quantity_available
+      @quantity_available = 0
+    end
+    return flowers_sold
+end
+```
+
+...
+
+
+
+Finally, while the requirements don't specify a return value, it would be useful to return the number of flowers sold. Let's call this variable flowers_sold.
+flowers_Sold is equal **num** when **num** >= **@quantity_available** -- otherwise flowers_sold is equal to **@quantity_available**. 
+
+Let's add this to our code.
 
 ...
 
@@ -179,17 +193,19 @@ So, we need to order no more than 285 (300 - 15), but can only order in bundles 
 # add flowers_to_order to @quantity available
 ```
 
-Remember you only want to restock if the difference between max_stock and quantity_available is greater than or equal to the number of flowers in a bundle. Thus, after you calculate this difference, you will you a conditional statement to check that this condition is met.
-
-Ok, let's turn our pseudo code into code. 
+Remember you only want to restock if the difference between max_stock and quantity_available is greater than or equal to the number of flowers in a bundle. Let's see how we can make sure that is the case with code. Let's turn our pseudo code into code. 
 
 ```ruby
 def restock
     # find difference between quantity_available and max_stock
     difference = @max_stock - @quantity_available
-    if difference >= @bundles
     # determine the number of bundles
-      num_bundles = difference / @bundles
+     num_bundles = (difference / @bundles).floor
+```
+
+Note that if difference < @bundles, this division will produce 0 for num_bundles.
+
+```
     # determine the number of flowers
       num_flowers = @bundles * num_bundles
       @quantity_available += num_flowers
@@ -203,7 +219,7 @@ Now let's test our method.
 
 First we'll print the **max_stock** and **quantity_available** for reference. We'll restock 2 times. The first time we should be able to restock because in our previous test we were left with 0 quantity_available -- 
 
-With the second call to restock, we should not be able to restock. We can use a loop to call restock twice and include a couple of the same print statements.
+With the second call to restock, we should not be able to restock. We can use a loop to call restock twice and include a couple of the same print statements. We should see no change in the quantity available after the second call to restock.
 
 ```ruby
 
@@ -216,7 +232,7 @@ puts "quantity_available: #{rose.quantity_available}"
 	puts "quantity_available: #{rose.quantity_available}"
 ```
 
-Looks good
+Looks good.
 
 --
 
@@ -226,9 +242,7 @@ That's it for all the required components.
 
 Now you could consider adding enhancements.
 
-A couple enhancements that come to my for me are a method that prints a description of the flower including it's **name, color, and size** -- 
-
-and a method that tells you the current important sale information including **@quantity_available** and **@total_sold**
+One enhancement that come to my for me are a method that prints a description of the flower including it's **name, color, size, quantity_available** and **total_sold**
 
 What do you think?
 
