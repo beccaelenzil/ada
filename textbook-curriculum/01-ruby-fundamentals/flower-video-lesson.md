@@ -10,6 +10,12 @@ In this video I'll focus on writing the two required methods for the Flower clas
 
 # Summary of what's written
 
+I'll get started by explaining what I have already written. 
+
+Notice that I include a block comment at the top that includes the requirements of the assignment. Before we get started, make sure you've read through the requirements on the assignment page. 
+
+Now I'll explain **initialize** method and **attribute accessor** method that I have already written. 
+
 ```ruby
 class Flower
   # reader
@@ -28,9 +34,7 @@ class Flower
 end
 ```
 
-I'll get started by explaining **initialize** method and **attribute accessor** method that I have already written. 
-
-These methods both have a special meaning to ruby.  When we create an instance of the Flower class, **initialize** is called with the arguments that we pass to new. In this way we can initialize a new Flower with particular attributes -- or instance variables. 
+These methods both have a special meaning to ruby.  When we create an instance of the Flower class, **initialize** is called with the arguments that we pass to the new method. In this way we can initialize a new Flower with particular attributes -- or instance variables. 
 
 **attr_accessor** is also a special ruby method that allows you to both read -- or get -- and write -- or set -- the instance variables that you specify. 
 
@@ -59,7 +63,7 @@ puts "max_stock: #{rose.max_stock}"
 puts "total_sold: #{rose.total_sold}"
 ```
 
-First we instantiate a new Flower -- a rose, with the 7 attributes from the table.
+First we instantiate a new Flower -- a rose, with the 7 attributes from the table. The attributes are stored in a dictionary, or hash. 
 
 Then we print all the attributes. 
 
@@ -71,50 +75,34 @@ Great, we instantiated a Flower and read all the attributes. Now we can move on 
 
 # sell method
 
-By refering back to the exercise requirements and the example tests, we know that our sell method should take one argument -- the number of flowers you are selling -- and update the **quantity_available** and the **total_sold.** If the number of flowers being sold, let's call this n, is less than or equal to the quantity available, this is straight forward algorithm -- n is added to the **total_sold** and subtracted from the **quantity_available** 
+By refering back to the exercise requirements and the example tests, we know that our sell method should take one argument -- the number of flowers you are selling -- and update the **quantity_available** and the **total_sold.** If the number of flowers being sold, let's call this num, is less than or equal to the quantity available, this is straight forward algorithm -- num is added to the **total_sold** and subtracted from the **quantity_available** 
 
-However, if n is greater than the **quantity__available** there is a decision to be made. We can't have negative flowers, so if we have 150 flowers available, we can't sell anymore than 150. lConsider how you'd like to handle this situation with code.
+However, if num is greater than the **quantity__available** there is a decision to be made. We can't have negative flowers, so if we have 150 flowers available, we can't sell anymore than 150. Consider how you'd like to handle this situation with code.
 
 **PAUSE**
 
 There are two main options.
 
-You could tell the user that there are not **n** flowers available with a print statement, and sell no flowers
+You could tell the user that there are not **num** flowers available with a print statement, and sell no flowers
 
 or
 
-You could tell the user that there are not **n** flowers available and sell all the remaining flowers so that quantity_available is equation to 0.
+You could tell the user that there are not **num** flowers available and sell all the remaining flowers so that quantity_available is equation to 0.
 
 I'll choose to program the second option. Let's write some pseudocode to outline our algorithm
 
 ```
 # sell method
-# if n <= quantity_available, updated total_sold and quantity_available by adding and subtracting n, respectively
-# if n > quantity_available, tell the user, update total_sold by adding quantity_available and set quantity available to 0.
+# if num <= quantity_available, updated total_sold and quantity_available by adding and subtracting n, respectively
+# if num > quantity_available, tell the user, update total_sold by adding quantity_available and set quantity available to 0.
 ```
 Now let's code this. 
+
+Notice the use of an incrementor **-=** and **+=** to update the instance variables.
 
 ```ruby
 def sell(num)
     if num <= @quantity_available
-      #@quantity_available = @quantity_available - num
-```
-
-You may have also written
-
-```ruby
-@quantity_available = @quantity_available - 1
-```
-or this may look unfarmiliar to you. 
-
-Let's rewrite this with the ```-=``` operator.
-
-```ruby
-@quantity_available -= num
-```
-Ok, let's carry on
-
-```ruby
       @quantity_available -= num
       @total_sold += num
       flowers_sold = num
@@ -129,8 +117,6 @@ end
 ```
 
 ...
-
-
 
 Finally, while the requirements don't specify a return value, it would be useful to return the number of flowers sold. Let's call this variable flowers_sold.
 flowers_Sold is equal **num** when **num** >= **@quantity_available** -- otherwise flowers_sold is equal to **@quantity_available**. 
@@ -230,6 +216,7 @@ puts "quantity_available: #{rose.quantity_available}"
 	puts "call restock"
 	rose.restock
 	puts "quantity_available: #{rose.quantity_available}"
+end
 ```
 
 Looks good.

@@ -34,35 +34,6 @@ class Flower
     @max_stock = flower_dict[:max_stock]
     @total_sold = flower_dict[:total_sold]
   end
-
-  # sell method
-  def sell(num)
-    if num <= @quantity_available
-      #@quantity_available = @quantity_available - num
-      @quantity_available -= num
-      @total_sold += num
-      sold = num
-    else
-      puts "You don't have #{num} flowers. You only have #{@quantity_available}. We will sell them"
-      sold = @quantity_available
-      @total_sold += @quantity_available
-      @quantity_available = 0
-    end
-    return sold
-  end
-
-  # restock method
-  def restock
-    # find difference between quantity_available and max_stock
-    difference = @max_stock - @quantity_available
-    # determine the number of bundles
-    num_bundles = (difference / @bundles).floor
-    # determine the number of flowers
-    num_flowers = @bundles * num_bundles
-    @quantity_available += num_flowers
-    return num_bundles
-  end
-
 end
 
 
@@ -80,6 +51,7 @@ rose = Flower.new({
   total_sold: 15042
   })
 
+puts
 puts "-----reader tests-----"
 puts "name: #{rose.name}"
 puts "size: #{rose.size}"
@@ -87,51 +59,10 @@ puts "color: #{rose.color}"
 puts "quantity_available: #{rose.quantity_available}"
 puts "bundles: #{rose.bundles}"
 puts "max_stock: #{rose.max_stock}"
-puts "total_sold: #{rose.total_sold}"
+puts "total_sold: #{rose.total_sold} \n"
 
+puts
 puts "-----sell method tests-----"
-puts "quantity_available: #{rose.quantity_available}"
-puts "total_sold: #{rose.total_sold}"
-puts "Sell 5"
-rose.sell(5)
-puts "quantity_available: #{rose.quantity_available}"
-puts "total_sold: #{rose.total_sold}"
-puts "Try to sell 200"
-rose.sell(200)
-puts "quantity_available: #{rose.quantity_available}"
-puts "total_sold: #{rose.total_sold}"
 
-
+puts
 puts "-----restock method tests-----"
-puts "call restock"
-rose.restock
-puts "max_stock: #{rose.max_stock}"
-puts "quantity_available: #{rose.quantity_available}"
-puts "call restock"
-rose.restock
-puts "quantity_available: #{rose.quantity_available}"
-
-=begin
-flower_dictionaries = [{name: "Lily", size: "medium",	color: "white",	quantity_available: 91, bundles: 20,	max_stock: 120, total_sold: 9241},
-{name: "Tulip",	size: "medium",	color:"yellow",	quantity_available: 179,	bundles: 30,	max_stock: 250,	total_sold: 8350},
-{name: "Tulip",	size: "medium",	color:"purple",	quantity_available: 52,	bundles: 30,	max_stock: 100,	total_sold: 2558},
-{name: "Daisy",	size: "medium",	color:"White",	quantity_available: 15,	bundles: 50,	max_stock: 300,	total_sold: 14839}]
-
-flowers = []
-flowers.push(rose)
-
-flower_dictionaries.each do |flower_dict|
-  flowers.push(Flower.new(flower_dict))
-end
-
-def automatically_restock(array_of_flowers)
-  array_of_flowers.each do |flower|
-    if flower.quantity_available < flower.bundles
-      flower.restock
-      puts "We restocked the #{flower.name}s"
-    end
-  end
-end
-
-automatically_restock(flowers)
-=end
