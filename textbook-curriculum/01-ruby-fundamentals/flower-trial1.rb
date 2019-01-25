@@ -79,6 +79,7 @@ rose = Flower.new({
   max_stock: 350,
   total_sold: 15042
   })
+
 puts
 puts "-----reader tests-----"
 puts "name: #{rose.name}"

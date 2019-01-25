@@ -34,7 +34,7 @@ class Flower
 end
 ```
 
-These methods both have a special meaning to ruby.  When we create an instance of the Flower class, **initialize** is called with the arguments that we pass to the new method. In this way we can initialize a new Flower with particular attributes -- or instance variables. 
+These methods both have a special meaning to ruby.  When we create an instance of the Flower class, **initialize** is called with the arguments that we pass to the new method. Our initialize() method takes a dictionary -- or in ruby, a hash, as the argument, and copies entries from the dictionary into instance variables.variables. 
 
 **attr_accessor** is also a special ruby method that allows you to both read -- or get -- and write -- or set -- the instance variables that you specify. 
 
@@ -69,13 +69,24 @@ Then we print all the attributes.
 
 Let's go to the terminal and run our script.
 
-Great, we instantiated a Flower and read all the attributes. Now we can move on to writing the sell method. 
+We'll type **ruby flower.rb**
+
+**---2:40---**
+
+ Great, we instantiated a Flower and read all the attributes. Now we can move on to writing the sell method. 
 
 --
 
 # sell method
 
-By refering back to the exercise requirements and the example tests, we know that our sell method should take one argument -- the number of flowers you are selling -- and update the **quantity_available** and the **total_sold.** If the number of flowers being sold, let's call this num, is less than or equal to the quantity available, this is straight forward algorithm -- num is added to the **total_sold** and subtracted from the **quantity_available** 
+**By refering back to the exercise requirements and the example tests, we know that our sell method should take one argument -- the number of flowers you are selling -- let's call this variable **num** and start by writing our signature for the method**
+
+```ruby
+def sell(num)
+
+end
+```
+Our sell method needs to update the **quantity_available** and the **total_sold.** If the number of flowers being sold is less than or equal to the quantity available, this is straight forward algorithm -- num is added to the **total_sold** and subtracted from the **quantity_available** 
 
 However, if num is greater than the **quantity__available** there is a decision to be made. We can't have negative flowers, so if we have 150 flowers available, we can't sell anymore than 150. Consider how you'd like to handle this situation with code.
 
@@ -94,11 +105,14 @@ I'll choose to program the second option. Let's write some pseudocode to outline
 ```
 # sell method
 # if num <= quantity_available, updated total_sold and quantity_available by adding and subtracting n, respectively
-# if num > quantity_available, tell the user, update total_sold by adding quantity_available and set quantity available to 0.
+# elsif num > quantity_available, tell the user, update total_sold by adding quantity_available and set quantity available to 0.
 ```
+
+**--8:00--**
+
 Now let's code this. 
 
-Notice the use of an incrementor **-=** and **+=** to update the instance variables.
+Notice the use of the **-=** and **+=** operator to update the instance variables.
 
 ```ruby
 def sell(num)
@@ -106,7 +120,7 @@ def sell(num)
       @quantity_available -= num
       @total_sold += num
       flowers_sold = num
-    else
+    elsif
       puts "You don't have #{num} flowers. You only have #{@quantity_available}. We will sell them"
       flowers_sold = @quantity_available
       @total_sold += @quantity_available
@@ -118,10 +132,21 @@ end
 
 ...
 
-Finally, while the requirements don't specify a return value, it would be useful to return the number of flowers sold. Let's call this variable flowers_sold.
-flowers_Sold is equal **num** when **num** >= **@quantity_available** -- otherwise flowers_sold is equal to **@quantity_available**. 
+Finally, I'll add one more condition if num < 0.
 
-Let's add this to our code.
+```ruby
+elsif num < 0
+	puts "You can't sell negative flowers"
+end
+
+```
+
+**ADD TO CODE**
+
+
+Finally, while the requirements don't specify a return value, it would be useful to return the number of flowers sold. I'll let you implement this portion.
+
+PAUSE
 
 ...
 
@@ -145,6 +170,8 @@ Looks good.
 
 --
 
+**--11:30--**
+
 #restock method
 
 Now for the restock method.
@@ -154,14 +181,19 @@ Let's remind ourself what the restock method should do.
 Reorder as much as possible before the quantity hits the max stock.
 Flowers can only be ordered in the quantities of their bundles.
 
-
 Does the restock method take any arguments?
 
 PAUSE
 
 no.
 
-Let's look at the example and rewrite the values as variables. We will use this pseudocode to outl
+Let's write the signature for this method. Notice that if the method does not take any arguments, you do not need parenthesis.
+
+Now Let's look at the example and rewrite the values as variables. We will use this pseudocode to outline our program. 
+
+You can pause the video while you read the daisy example at the top of the script.
+
+PAUSE
 
 ```
 If there are only 15 daisy's in stock, we want to restock to 300 as 
@@ -186,10 +218,10 @@ def restock
     # find difference between quantity_available and max_stock
     difference = @max_stock - @quantity_available
     # determine the number of bundles
-     num_bundles = (difference / @bundles).floor
+     num_bundles = difference / @bundles
 ```
 
-Note that if difference < @bundles, this division will produce 0 for num_bundles.
+Note that ruby performs integer division. since both difference and @bundles are integers. If difference < @bundles, this division will produce 0 for num_bundles.
 
 ```
     # determine the number of flowers
@@ -200,6 +232,8 @@ Note that if difference < @bundles, this division will produce 0 for num_bundles
     end
   end
 ```
+
+**--17:30--**
 
 Now let's test our method.
 
@@ -212,7 +246,7 @@ With the second call to restock, we should not be able to restock. We can use a 
 puts "-----restock method tests-----"
 puts "max_stock: #{rose.max_stock}"
 puts "quantity_available: #{rose.quantity_available}"
-2 times.do
+2.times do
 	puts "call restock"
 	rose.restock
 	puts "quantity_available: #{rose.quantity_available}"

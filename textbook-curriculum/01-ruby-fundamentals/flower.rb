@@ -34,6 +34,32 @@ class Flower
     @max_stock = flower_dict[:max_stock]
     @total_sold = flower_dict[:total_sold]
   end
+
+    #sell method
+    # if num <= quantity_available, update total_sold and quantity_available by adding and subtracting num, respectively
+    # if num > quantity_available, we'll tell the user we don't have that many flowers, and we'll sell quantity_available
+  def sell(num)
+    if num <= quantity_available
+      @total_sold += num
+      @quantity_available -= num
+    else
+      puts "You don't have #{num} flowers. You have #{@quantity_available} flower. We will sell them."
+      @total_sold += @quantity_available
+      @quantity_available = 0
+    end
+  end
+
+  #Restock
+  # find the difference between the max_stock and the quantity_available
+  # divide the difference by the number of flowers in a bundle (@bundles) to get the number_of_bundles
+  # multiply number_of_bundles by @bundles to get flowers_to_order
+  # add flowers_to_order to @quantity_available
+  def restock
+    difference = max_stock - @quantity_available
+    num_bundles = (difference/@bundles).floor
+    flowers_to_order = num_bundles*@bundles
+    @quantity_available += flowers_to_order
+  end
 end
 
 
@@ -63,6 +89,22 @@ puts "total_sold: #{rose.total_sold} \n"
 
 puts
 puts "-----sell method tests-----"
+puts "quantity_available: #{rose.quantity_available}"
+puts "total_sold: #{rose.total_sold}"
+rose.sell(5)
+puts "quantity_available: #{rose.quantity_available}"
+puts "total_sold: #{rose.total_sold}"
+rose.sell(200)
+puts "quantity_available: #{rose.quantity_available}"
+puts "total_sold: #{rose.total_sold}"
 
 puts
 puts "-----restock method tests-----"
+puts "quantity_available: #{rose.quantity_available}"
+puts "max_stock: #{rose.max_stock}"
+
+2.times do
+  puts "call restock"
+  rose.restock
+  puts "quantity_available: #{rose.quantity_available}"
+end
