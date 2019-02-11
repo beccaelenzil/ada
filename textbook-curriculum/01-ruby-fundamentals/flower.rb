@@ -35,38 +35,42 @@ class Flower
     @total_sold = flower_dict[:total_sold]
   end
 
-    #sell method
-    # if num <= quantity_available, update total_sold and quantity_available by adding and subtracting num, respectively
-    # if num > quantity_available, we'll tell the user we don't have that many flowers, and we'll sell quantity_available
+  #sell method
+  # if num <= quantity_available, update total_sold and quantity_available by adding and subtracting num respectively
+  # elsif num > quantity_available, tell the user, update total_sold by adding quantity_available, set quantity_available to 0
+  # elsif num < 0, you cannot sell negative flowers
   def sell(num)
-    if num <= quantity_available
-      @total_sold += num
+    if num < 0
+      puts "You can't sell negative flowers"
+    elsif num <= @quantity_available
       @quantity_available -= num
-    else
-      puts "You don't have #{num} flowers. You have #{@quantity_available} flower. We will sell them."
+      @total_sold += num
+    elsif num > @quantity_available
+      puts "You don't have #{num} flowers. We will sell #{@quantity_available}"
       @total_sold += @quantity_available
       @quantity_available = 0
     end
+
   end
 
-  #Restock
-  # find the difference between the max_stock and the quantity_available
-  # divide the difference by the number of flowers in a bundle (@bundles) to get the number_of_bundles
-  # multiply number_of_bundles by @bundles to get flowers_to_order
-  # add flowers_to_order to @quantity_available
+  #restock method
+  # find the difference between the max_stock and quantity_available
+  # integer division - divide the difference by the number in a bundle (@bundles),
+  # --> store this value in number_of_bundles
+  # multiply number of bundles by bundles to get number of flower_to_order
+  # add flower_to_order to @quantity_available
   def restock
-    difference = max_stock - @quantity_available
-    num_bundles = (difference/@bundles).floor
-    flowers_to_order = num_bundles*@bundles
+    difference = @max_stock - @quantity_available
+    num_bundles = difference / @bundles
+    flowers_to_order = num_bundles * @bundles
     @quantity_available += flowers_to_order
   end
-end
 
+end
 
 
 #---tests----
 #initialize method - write 7 attributes
-
 rose = Flower.new({
   name: "rose",
   size: "medium",
@@ -76,8 +80,8 @@ rose = Flower.new({
   max_stock: 350,
   total_sold: 15042
   })
-
 puts
+#reader
 puts "-----reader tests-----"
 puts "name: #{rose.name}"
 puts "size: #{rose.size}"
@@ -90,21 +94,28 @@ puts "total_sold: #{rose.total_sold} \n"
 puts
 puts "-----sell method tests-----"
 puts "quantity_available: #{rose.quantity_available}"
-puts "total_sold: #{rose.total_sold}"
+puts "total sold: #{rose.total_sold}"
+puts "Sell 5"
 rose.sell(5)
 puts "quantity_available: #{rose.quantity_available}"
-puts "total_sold: #{rose.total_sold}"
+puts "total sold: #{rose.total_sold}"
+puts "Sell 200"
 rose.sell(200)
 puts "quantity_available: #{rose.quantity_available}"
-puts "total_sold: #{rose.total_sold}"
+puts "total sold: #{rose.total_sold}"
+puts "Sell -200"
+rose.sell(-200)
+puts "quantity_available: #{rose.quantity_available}"
+puts "total sold: #{rose.total_sold}"
 
 puts
 puts "-----restock method tests-----"
 puts "quantity_available: #{rose.quantity_available}"
-puts "max_stock: #{rose.max_stock}"
-
+puts "max stock: #{rose.max_stock}"
 2.times do
   puts "call restock"
   rose.restock
   puts "quantity_available: #{rose.quantity_available}"
 end
+
+puts
