@@ -66,7 +66,7 @@ for amount in money_tests
 end
 
 # note, without the $ at the end of the string "$10.234" is valid
-=end
+
 
 #--Start and End of a String
 ada_pattern = /^ada/
@@ -79,4 +79,97 @@ for ada in adas
   else
     puts "#{ada} is NOT valid"
   end
+end
+
+#---repetitions
+
+#/[abc]{3}/
+
+#A range of repetitions can also be repeated by using two parameters in the curly braces.
+#For example /[abc]{3, 5}/ would allow the characters to repeat between 3 and 5 times.
+
+#/[abc]{3, 5}/
+
+#/a{2, 3}/
+
+#--- capture groups
+
+# However, you need to have the full ada in order to match, so adada does not match.
+#puts(/(ada *)+/.match('adada'))
+
+# ---
+IPaddress_pattern = /^([0-9]{1,3}\.){3}\d{1,3}$/
+
+IPaddresses = ['127.0.0.1', '206.190.36.45','127.0.0', '1273.0.0.1','127.0.0.1.1']
+
+for item in IPaddresses
+  if IPaddress_pattern.match(item)
+    puts "#{item} is valid"
+  else
+    puts "#{item} is NOT valid"
+  end
+end
+
+
+# {}"Ada", "Ada Academy" or "Ada Developers Academy",
+# but not "Ada Developers" by itself.
+# Should be case-insensitive (so both "Ada" and "ada" are OK).
+
+ada_pattern = /^[Aa]da(( [Dd]evelopers)? [Aa]cademy)?$/
+
+# you can take or leave "Developers Academy"
+# and within "Developers Academy," you can take or leave Developers
+
+
+ada_patterns = ["ada", "Ada", "Ada academy",  "Ada Developers Academy", "Ada Developers"]
+
+for item in ada_patterns
+  if ada_pattern.match(item)
+    puts "#{item} is valid"
+  else
+    puts "#{item} is NOT valid"
+  end
+end
+
+
+
+email_regex = /.+@(.+\..+)/
+match_result = "dan@adadev.org".match(email_regex)
+
+#puts match_result[1]
+
+emails = ['dan@adadev.org', 'dee@adadev.org', 'karib@gmail.com']
+
+# Create a new hash where missing values are initialized to 0
+domain_counts = Hash.new(0)
+
+emails.each do |email|
+  match_result = email.match(email_regex)
+  next unless match_result # skip strings that don't match
+  domain = match_result[1]
+  domain_counts[domain] += 1
+end
+
+domain_counts.each do |domain, count|
+  puts "#{domain}: #{count}"
+end
+
+=end
+# practice search
+
+phone_numbers = [
+  "(206) 555-1234",
+  "425-555-9999",
+  "406.555.1818",
+  "+1 206 555 8888",
+  "4255558872",
+]
+
+
+phone_regex = /^.*(\d{3}).*(\d{3}).*(\d{4})$/
+phone_numbers.each do |item|
+  phone_number = item.match(phone_regex)
+  formatted_number = "("+phone_number[1]+") "+phone_number[2]+"-"+phone_number[3]
+  puts  "(#{phone_number[1]}) #{phone_number[2]}-#{phone_number[3]}"
+  puts formatted_number
 end
