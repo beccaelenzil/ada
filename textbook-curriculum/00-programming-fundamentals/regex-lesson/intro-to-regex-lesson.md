@@ -12,10 +12,25 @@ Regular expressions are a great tool for working with text. Using regular expres
 
 You will likely only use a limited number of expressions during your time at Ada, but understanding Regex can simplify your code, and Regex is useful across multiple languages.
 
-## Example use case
+## Use Case
+
+### Creating a database of Late Seattle Public School Buses
 
 
+![delayed buses] (https://github.com/beccaelenzil/ada/blob/master/textbook-curriculum/00-programming-fundamentals/regex-lesson/delayed-buses.png/?raw=true)
 
+```ruby
+late_buses = ['Route 464 to Washington is running 15 minutes late',
+'Route 546 to South Shore is running two hours late',
+'Route 450 to Aki Kurose is running one hour late',
+'Route 1813 to West Seattle Elementary is running two hours late',
+'Route 398 to West Seattle High is running one hour late',
+'Route 547 to South Shore is running 15 minutes late']
+```   
+
+![delayed buses] (https://github.com/beccaelenzil/ada/blob/master/textbook-curriculum/00-programming-fundamentals/regex-lesson/late-buses-df.png/?raw=true)   
+
+![delayed buses] (https://github.com/beccaelenzil/ada/blob/master/textbook-curriculum/00-programming-fundamentals/regex-lesson/late-buse-visualization.png/?raw=true) 
 
 ## Regular Expression Basics
 
