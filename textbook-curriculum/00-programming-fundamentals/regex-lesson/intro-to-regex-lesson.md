@@ -14,10 +14,29 @@ You will likely only use a limited number of expressions during your time at Ada
 
 ## Use Case
 
-### Creating a database of Late Seattle Public School Buses
+### Creating a database and visualization of Late Seattle Public School Buses
 
+---
 
-![delayed buses] (https://github.com/beccaelenzil/ada/blob/master/textbook-curriculum/00-programming-fundamentals/regex-lesson/delayed-buses.png/?raw=true)
+![delayed buses](images/delayed-buses.png)
+
+---
+
+from this web scraped html: 
+
+```ruby
+<p>Route 464 to Washington is running 15 minutes late<br/>
+Route 546 to South Shore is running two hours late<br/>
+Route 450 to Aki Kurose is running one hour late<br/>
+Route 1813 to West Seattle Elementary is running two hours late<br/>
+Route 398 to West Seattle High is running one hour late<br/>
+Route 547 to South Shore is running 15 minutes late<br/>
+Route 630 to Queen Anne is running 15 minutes late<br/>
+Route 415 to World School is running 35 minutes late<br/>
+Route 578 to TOPS is running 15 minutes late</p>
+```
+
+to these collection of strings:
 
 ```ruby
 late_buses = ['Route 464 to Washington is running 15 minutes late',
@@ -26,11 +45,19 @@ late_buses = ['Route 464 to Washington is running 15 minutes late',
 'Route 1813 to West Seattle Elementary is running two hours late',
 'Route 398 to West Seattle High is running one hour late',
 'Route 547 to South Shore is running 15 minutes late']
+
+
 ```   
 
-![delayed buses] (https://github.com/beccaelenzil/ada/blob/master/textbook-curriculum/00-programming-fundamentals/regex-lesson/late-buses-df.png/?raw=true)   
+to this database:
 
-![delayed buses] (https://github.com/beccaelenzil/ada/blob/master/textbook-curriculum/00-programming-fundamentals/regex-lesson/late-buse-visualization.png/?raw=true) 
+![delayed buses](images/late-buses-df.png)   
+
+---
+
+![delayed buses](images/late-bus-visualization.png) 
+
+---
 
 ## Regular Expression Basics
 
@@ -60,7 +87,32 @@ end
 ```
 The above snippet will print out "The String has ada in it!"  
 
-Regular Expressions can also be compared using the `=~` operator.  The `=~` operator returns the index of the first match in the string  For example:  `pattern =~ 'ada'` will return 0, while `pattern =~ "learn at ada academy."` will return 9.
+Regular Expressions can also be compared using the `=~` operator.  
+
+The `=~` operator returns the index of the first match in the string  For example:  
+
+```ruby
+`pattern =~ 'ada'`
+# => 0
+```
+while 
+
+```ruby
+pattern =~ "learn at ada academy."` 
+# => 9 
+```
+
+What will the following return?
+
+```ruby
+pattern =~ "I love ada developers academy"
+pattern =~ "Ada Developers Academy"
+pattern =~ "Seattle's a great city"
+
+pattern.match('ada')
+pattern.match('hello world')
+
+```
 
 Both `match` and `=~` will return a truthy result if any substring matches the pattern.  That's an important issue to remember.  If you want to match a pattern exactly, the regular expression needs to be more specific using special characters to indicate the start and end of the string.  
 
@@ -70,7 +122,17 @@ On the other hand what if you wanted to match either "Ada" or "ada."  To handle 
 
 A **character set**, also called a **character class** is a way to tell the regex engine to match only one out of several characters.  We define a character set with square brackets.  For example `/[Ss]/` will match both capital and lowercase S.  Combining the character set with the previous larger literal, `[Aa]da` will match both "Ada" and "ada".  
 
-You can also adjust the character set to accept a range of characters.  For example:  `/[A-Z]/`  will accept a single character in the range A to Z (must be capitalized), while `/[0-9]/` will accept a single digit.  If you wanted to accept any alphabetic characters you could use `/[A-Za-z]/`.
+If you want the **whole** regex to ignore case you can use the i flag:
+
+```ruby
+pattern = /ada/i
+
+pattern =~ 'ADA' # => truthy
+pattern =~ 'aDA' # => truthy
+pattern =~ 'aDa' # => truthy
+```
+
+You can also adjust the character set to accept a range of characters.  For example:  `/[A-Z]/`  will accept a single character in the range A to Z (must be capitalized), while `/[0-9]/` will accept a single digit.  If you wanted to accept any alphabetic characters you could use `/[A-Za-z]/` or `/[A-Z]/i`.
 
 ![/[A-Aa-z]/](images/regex1.png)
 
@@ -78,7 +140,16 @@ You can also adjust the character set to accept a range of characters.  For exam
 
 How could you match any alphanumeric digit like "a", "W", or "0"?
 
-[Check your answer here](solutions/regex.md#Character%20Sets)
+<details>
+  <summary>
+  Check your answer here
+  </summary>
+	
+  ```ruby
+  pattern = /[A-Za-z0-9]/
+  pattern = /[A-Z0-9]/i
+  ```
+</details>
 
 ## The Wildcard and Quantifiers
 
@@ -102,7 +173,15 @@ Write a regular expression to match a valid email of form `name@domain.tld`
 - Rejects `dan@adadev.`, `charles.com`, `@adadev.org`, `sarah@.org`
 - Use `\.` for a literal period (more on this later)
 
-[Check your answer here](solutions/regex.md#Wildcards%20and%20Quantifiers)
+<details>
+  <summary>
+  **Check your answer here**
+  </summary>
+	
+  ```ruby
+  pattern = /.+@.+\..+/
+  ```
+</details>
 
 ## The NOT `^` Character
 
@@ -110,13 +189,28 @@ Sometimes you want to exclude a certain group of characters, or sometimes it's e
 
 For example:  `/[^abc]/` excludes a, b and c.
 
-Another example would be `/[^0-9]/` which would exclude any digit or `/Ada is number [^2-9^a-z^A-Z^0]` which would exclude any letter or digit, except `1`.
+
+What do the following patterns exclude?
+
+```ruby
+/[^0-9]/
+/Ada is number [^2-9^a-z^A-Z^0]/ 
+```
 
 ### Practice
 
 How can you write a regex which would accept `dog`, `sog`, and `hog`, but exclude `bog`?
 
-[Check your answer here](solutions/regex.md#Not)
+<details>
+  <summary>
+  **Check your answer here**
+  </summary>
+	
+  ```ruby
+  pattern = /[^b]og/
+  ```
+</details>
+
 
 ## Escape characters
 
