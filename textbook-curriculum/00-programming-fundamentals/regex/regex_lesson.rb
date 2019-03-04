@@ -25,7 +25,7 @@ puts alphanumeric =~ '...0123'
 
 # --- The Wildcard and Quantifiers
 
-email = /[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+/
+email = /[^\?\!]+@[A-Za-z]+\.[A-Za-z]+/
 test_emails = ["dee@adadev.org", "adalovelace@gmail.com", "magictavern@puppies.supplies", "dan@adadev.", "charles.com", "@adadev.org", "sarah@.org"]
 
 for test in test_emails
