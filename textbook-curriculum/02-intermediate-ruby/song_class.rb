@@ -5,7 +5,6 @@ class Song
   # This will be set to 0 when the program is loaded
   @@total_plays = 0
 
-
   def initialize(title, artist, filename)
     @title = title
     @artist = artist

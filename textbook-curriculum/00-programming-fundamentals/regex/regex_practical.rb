@@ -17,8 +17,16 @@
 #strings = ['98161','75007-1234', '9816111', '750071234', '75007-123']
 
 #3.Write a regex for a date in the mm/dd/yyyy format.
-pattern = //
+#pattern = /^\d{2}\/\d{2}\/\d{4}$/
+#strings = ['01/01/2019', '1/1/2019']
+# => [ valid, not valid]
+
+#5. Washington State Driver's license is formatted to start with 1-7 alphabetic #(capitalized) characters followed by 5 characters which can be capital letters, #numbers or "*". Create a regex to validate a Washington Driver's license.
+
+pattern = /^[A-Z]{1,7}[A-Z0-9\*]{5}$/
+strings = ['AAAA09*AA','AAAAAAAAAAAA', 'AAAAAAAAAAAAA']
+# => [valid, valid, not valid]
 
 strings.each do |element|
-  puts pattern.match(element) ? "#{item} is valid \n " : "#{item} is NOT valid \n "
+  puts pattern.match(element) ? "#{element} is valid \n " : "#{element} is NOT valid \n "
 end

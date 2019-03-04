@@ -6,23 +6,30 @@ Be able to answer the following questions:
 - How can I write a regular expression to match on a specific pattern?
 - How can I use regular expressions to speed up my development workflow?
 
-## Introduction  
+
+## Introduction
+
+* Identify and process text.
+* Used for validating that a phone number or zip code is in the correct format, for example.
+* Simplify Code.
+* Useful across multiple languages.
+ 
+<details>
+  	<summary>
+	Introduction text
+	</summary> 
 
 Regular expressions are a great tool for working with text. Using regular expressions (AKA Regex) you can **identify and process patterns** of text. Many people find regular expressions difficult to understand and use, but they can make a variety of tasks much easier, like validating that a phone number or zip code is in the right format.
 
 You will likely only use a limited number of expressions during your time at Ada, but understanding Regex can simplify your code, and Regex is useful across multiple languages.
 
+</details>
+
 ## Use Case
-
-### Creating a database and visualization of Late Seattle Public School Buses
-
----
 
 ![delayed buses](images/delayed-buses.png)
 
----
-
-from this web scraped html: 
+**from this web scraped html:**
 
 ```ruby
 <p>Route 464 to Washington is running 15 minutes late<br/>
@@ -34,26 +41,13 @@ Route 547 to South Shore is running 15 minutes late<br/>
 Route 630 to Queen Anne is running 15 minutes late<br/>
 Route 415 to World School is running 35 minutes late<br/>
 Route 578 to TOPS is running 15 minutes late</p>
-```
-
-to these collection of strings:
-
-```ruby
-late_buses = ['Route 464 to Washington is running 15 minutes late',
-'Route 546 to South Shore is running two hours late',
-'Route 450 to Aki Kurose is running one hour late',
-'Route 1813 to West Seattle Elementary is running two hours late',
-'Route 398 to West Seattle High is running one hour late',
-'Route 547 to South Shore is running 15 minutes late']
-
-
-```   
+``` 
 
 to this database:
 
 ![delayed buses](images/late-buses-df.png)   
 
----
+to this visualization:
 
 ![delayed buses](images/late-bus-visualization.png) 
 
