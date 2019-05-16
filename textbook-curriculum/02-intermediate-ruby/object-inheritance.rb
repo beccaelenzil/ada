@@ -42,6 +42,6 @@ class Condo < Apartment
 
 end
 
-dewey_st = Condo.new(123, "Dewey", "1", "Seattle", "WA", 98112, 870000, 1250)
+dewey_st = Condo.new(123, "413 Dewey Pl E", "1", "Seattle", "WA", 98112, 870000, 1250)
 
 puts dewey_st.price_per_square_foot
