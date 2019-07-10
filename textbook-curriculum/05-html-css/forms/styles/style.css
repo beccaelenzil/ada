@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border: lightblue 2px solid;
+    justify-content: space-evenly;
+}
+
+body{
+    text-align: left;
+    align-items: stretch;
+    justify-content: space-evenly;
+}

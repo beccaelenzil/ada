@@ -1,0 +1,24 @@
+<h1>Sign up for the Ada newsletter</h1>
+<form action="/newsletter/signup" method="post">
+    <div>
+        <label for="email">Your email:</label>
+        <input name="email" type="text" placeholder="lovelace@adadev.org">
+    </div>
+    
+    <div>
+        <label for="name">Your name:</label>
+        <input name="name" type="text" placeholder="Ada Lovelace">
+    </div>
+
+
+    <div>
+        <label for="source">How did you hear about us?</label>
+        <select id="source" name="source">
+            <option value="search">Found through a search engine</option>
+            <option value="friend">Referred by a friend</option>
+            <option value="sponsor-company">Through one of our sponsor companies</option>
+        </select>
+    </div>
+    
+    <input type="submit" value="Sign up now!">
+</form>
