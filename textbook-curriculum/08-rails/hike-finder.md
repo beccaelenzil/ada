@@ -6,7 +6,7 @@
 1. How would you create a database table including the above columns?
     - What command would you use to generate the migration?
 
-rails generate model hike id:integer name:string length_miles:float elevation_gain_feet:integer max_elevation_feet:integer rating:integer
+rails generate model Hike id:integer name:string length_miles:float elevation_gain_feet:integer max_elevation_feet:integer rating:integer
 
     - Do you need to include the `id`, `created_at` and `updated_at` fields in the migration?
 
@@ -37,13 +37,37 @@ rails generate migration add_to_hikes
 ### Reading Data
 
 1. How would you store the list of all hikes in a variable named `hike_list`?
+
+hike_list = Hike.all
+
 1. How would you search for the hike with ID 13 and store it in a variable named `hike`?
+
+hike = Hike.find(13)
+hie = Hike.where(id: 13)
+
     - There are two ways to do this! What is the other one?
 1. What happens when you use each of the previous two methods to search for a hike with ID 19?
+
+nil
+
 1. How would you get the list of hikes with a rating of 4?
+Hike.where(rating: 4)
+
 1. What happens if you try to get the list of hikes with a rating of 1?
+
+nil
+
 1. How would you get the number of hikes in the database?
+Hike.count
 1. **BONUS:** How would you get the list of hikes less than 8 miles long?
+
+# Using the select enumerable (slower but easier to read)
+Hike.all.select do |hike|
+  hike.length_miles < 8
+end
+# - or -
+# Using a custom SQL query (faster but harder to read)
+Hike.where("length_miles < ?", 8)
 
 ### Creating Data
 
@@ -54,6 +78,9 @@ name    | length_miles | elevation_gain_feet | max_elevation_feet | rating
 Fortune Ponds | 13.0   | 2700                | 4700               | 3
 
 1. How would you build a new instance of the `Hike` model with the above data and store it in a local variable named `new_hike`, without saving it to the database?
+
+new_hike = Hike.create(name: "Fortune Ponds" length_miles: 13.0,	elevation_gain_feet: 2700, max_elevation_feet: 4700, rating: 3)
+
 1. Once `new_hike` has been built, how would you save it to the database?
 1. How would you accomplish the above two steps in one method call?
 
