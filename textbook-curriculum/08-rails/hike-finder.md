@@ -82,7 +82,12 @@ Fortune Ponds | 13.0   | 2700                | 4700               | 3
 new_hike = Hike.create(name: "Fortune Ponds" length_miles: 13.0,	elevation_gain_feet: 2700, max_elevation_feet: 4700, rating: 3)
 
 1. Once `new_hike` has been built, how would you save it to the database?
+
+new_hike.save
+
 1. How would you accomplish the above two steps in one method call?
+
+create
 
 ### Updating Data
 
@@ -102,9 +107,13 @@ new_hike = Hike.create(name: "Fortune Ponds" length_miles: 13.0,	elevation_gain_
     ```
     How would you change all the fields on the `hike` local variable to match whats in the hash and save it to the database in one line of code?
 
+    update
+
 ### Deleting Data
 
 1. There are two ActiveRecord methods that will remove a row from the database. What are they, and which one should you be using?
+destroy and delete (use destroy)
+
 1. What will the following code print out?
 
 ```ruby
