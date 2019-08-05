@@ -31,12 +31,14 @@ n = foods.length
 
 menu = []
 
-(1..n).each do
+
+(1..n).each do |i|
+
     # random generation
     adjective = adjectives.sample
     style = styles.sample
     food = foods.sample
-    menu_item = adjective + " " + style + " " + food
+    menu_item = i.to_s + ". " + adjective + " " + style + " " + food
 
     # puts item in menu
     menu << menu_item
@@ -44,7 +46,9 @@ menu = []
     # remove used items
     adjectives.delete(adjective)
     styles.delete(style)
-    food.delete(food)
+    foods.delete(food)
+
+    
 end
 
 ap menu
