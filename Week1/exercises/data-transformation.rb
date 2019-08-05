@@ -1,6 +1,7 @@
 # Part 1
 
-#irb -r ./data_transformation.rb
+# irb -r ./data-transformation.rb
+# puts "".methods.grep(/case/)
 
 # Iterating through arrays
 
@@ -55,6 +56,17 @@ end
 
 names = ['Grumpy', 'Happy', 'Sleepy', 'Bashful', 'Sneezy', 'Dopey', 'Doc']
 
+def array_to_hash_func(names)
+    i = 1
+    dwarf_array = []
+    names.each do |name|
+        dwarf_array << {:name => name, :id => i}
+        i += 1
+    end
+    return dwarf_array
+end
+
+
 # => [{:name=>"Grumpy", :id=>1},
 # {:name=>"Happy", :id=>2},
 # {:name=>"Sleepy", :id=>3},
@@ -68,6 +80,16 @@ names = ['Grumpy', 'Happy', 'Sleepy', 'Bashful', 'Sneezy', 'Dopey', 'Doc']
 names = ['Grumpy', 'Happy', 'Sleepy', 'Bashful', 'Sneezy', 'Dopey', 'Doc']
 specialties = ['grump', 'smile', 'nap', 'blush', 'sneeze', 'goof', 'contemplate']
 
+def array_to_hash_func2(names, specialties)
+    i = 0
+    dwarf_array = []
+    names.each do |name|
+        dwarf_array << {:name => name, :speciality => specialties[i-1], :id => i}
+        i += 1
+    end
+    return dwarf_array
+end
+
 # => [{:name=>"Grumpy", :specialty=>"grump", :id=>1},
 # {:name=>"Happy", :specialty=>"smile", :id=>2},
 # {:name=>"Sleepy", :specialty=>"nap", :id=>3},
@@ -77,8 +99,17 @@ specialties = ['grump', 'smile', 'nap', 'blush', 'sneeze', 'goof', 'contemplate'
 # {:name=>"Doc", :specialty=>"contemplate", :id=>7}]
 
 # 3. Given these two arrays of strings, write code that returns an array of arrays. Each element in the larger array should have two elements: the first element is the name, and the second element is the specialty.
-names = ['Grumpy', 'Happy', 'Sleepy', 'Bashful', 'Sneezy', 'Dopey', 'Doc']
-specialties = ['grump', 'smile', 'nap', 'blush', 'sneeze', 'goof', 'contemplate']
+NAMES = ['Grumpy', 'Happy', 'Sleepy', 'Bashful', 'Sneezy', 'Dopey', 'Doc']
+SPECIALTIES = ['grump', 'smile', 'nap', 'blush', 'sneeze', 'goof', 'contemplate']
+
+def arrays_to_array_func(names, specialties)
+    n = names.length
+    new_array = []
+    (0..n-1).each do |i|
+        new_array << [names[i], specialties[i]]
+    end
+    return new_array
+end
 
 # => [["Grumpy", "grump"], ["Happy", "smile"], ["Sleepy", "nap"], ["Bashful", "blush"], ["Sneezy", "sneeze"], ["Do
 
@@ -86,7 +117,7 @@ specialties = ['grump', 'smile', 'nap', 'blush', 'sneeze', 'goof', 'contemplate'
 
 # 4. Given this array of hashes, iterate through the array and return an array of strings. Each string should be in the following format: Grumpy's specialty is to GRUMP, where Grumpy is replaced with each name and GRUMP is the specialty in capital letters.
 
-characters = [{:name=>"Grumpy", :specialty=>"grump", :id=>1},
+CHARACTERS = [{:name=>"Grumpy", :specialty=>"grump", :id=>1},
  {:name=>"Happy", :specialty=>"smile", :id=>2},
  {:name=>"Sleepy", :specialty=>"nap", :id=>3},
  {:name=>"Bashful", :specialty=>"blush", :id=>4},
@@ -101,3 +132,12 @@ characters = [{:name=>"Grumpy", :specialty=>"grump", :id=>1},
 # "Sneezy's specialty is to SNEEZE",
 # "Dopey's specialty is to GOOF",
 # "Doc's specialty is to CONTEMPLATE"]
+
+def hash_to_array_func(characters)
+    n = CHARACTERS.length
+    dwarf_array = []
+    characters.each do |character|
+        dwarf_array << character[:name] + "'s specialty is to " + character[:specialty].upcase
+    end
+    return dwarf_array
+end
