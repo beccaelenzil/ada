@@ -25,8 +25,8 @@ def user_interface()
             print "Enter number #{i}: "
             number = gets.chomp
             begin
-               number = Float(number)
-               numbers << number
+                number = Float(number)
+                numbers << number
             rescue
                 puts "You must enter a numeric value"
                 number = [nil]

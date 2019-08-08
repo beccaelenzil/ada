@@ -51,6 +51,7 @@ def menu_func()
     puts "Average Price: #{average_price}"
     puts "Allergens: #{allergens}"
 
+# 4. "What meal do you want to know the price of"
     puts "What meal do you want to know the price of"
     name = gets.chomp
 
