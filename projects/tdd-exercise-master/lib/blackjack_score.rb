@@ -3,14 +3,23 @@
 VALID_CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 def blackjack_score(hand)
-  return hand.sum
-end
-
-def score_hand(hand)
-
   # raise error if card is invalid
   valid_cards(hand)
 
+  # make hand array all integers
+  hand = make_numeric_hand(hand)
+
+  total = hand.sum
+
+  # raise error if score is greater than 21
+  if total > 21
+    raise ArgumentError.new("The hand score is #{total} which is greater than 21")
+  end
+
+  return total
+end
+
+def make_numeric_hand(hand)
   # score array
   score_array = hand.map do |card|
     if ['Jack', 'Queen', 'King'].include?card
@@ -21,13 +30,6 @@ def score_hand(hand)
       card
     end
   end
-
-  # raise error if score is greater than 21
-  if blackjack_score(score_array) > 21
-    raise ArgumentError.new("The hand score is #{score_array.sum} which is greater than 21")
-  end
-
-
   return score_array
 end
 

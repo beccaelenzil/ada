@@ -18,7 +18,7 @@ describe 'Blackjack Score' do
     score = blackjack_score(hand)
 
     # Assert <-  You do this part!
-    expect score.must_equal(7)
+    expect score.must_equal 7
 
   end
 
@@ -28,12 +28,12 @@ describe 'Blackjack Score' do
     hand2 = ['King', 'Queen']
 
     # Act
-    score_array1 = score_hand(hand1)
-    score_array2 = score_hand(hand2)
+    score_array1 = make_numeric_hand(hand1)
+    score_array2 = make_numeric_hand(hand2)
 
     # Assert
-    expect score_array1.must_equal([10, 10])
-    expect score_array2.must_equal([10, 10])
+    expect score_array1.must_equal [10, 10]
+    expect score_array2.must_equal [10, 10]
 
   end
 
@@ -42,7 +42,7 @@ describe 'Blackjack Score' do
     hand = [2, 4, 'Ace']
 
     # Act
-    score_array = score_hand(hand)
+    score_array = make_numeric_hand(hand)
 
     # Assert
     expect score_array.must_equal([2, 4, 11])
@@ -54,7 +54,7 @@ describe 'Blackjack Score' do
     hand = [2, 9, 'Ace']
 
     # Act
-    score_array = score_hand(hand)
+    score_array = make_numeric_hand(hand)
     
     # Assert
     expect score_array.must_equal([2, 9, 1])
@@ -63,11 +63,16 @@ describe 'Blackjack Score' do
 
   it 'raises an ArgumentError for invalid cards' do
     # Arrange
-    hand = [12, 9, 'Ace']
+    hand1 = [12, 9, 'Ace']
+    hand2 = [2, 9, 'Hello']
 
     # Act/Assert
     expect {
-      score_hand(hand)
+      blackjack_score(hand1)
+    }.must_raise ArgumentError
+
+    expect {
+      blackjack_score(hand2)
     }.must_raise ArgumentError
 
   end
@@ -78,7 +83,7 @@ describe 'Blackjack Score' do
 
     # Act/Assert
     expect {
-      score_hand(hand)
+      blackjack_score(hand)
     }.must_raise ArgumentError
 
   end
