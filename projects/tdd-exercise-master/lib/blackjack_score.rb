@@ -33,7 +33,7 @@ end
 
 def score_ace(hand)
   hand.delete('Ace')
-  if blackjack_score(hand) < 11
+  if hand.sum < 11
     return 11
   else
     return 1
