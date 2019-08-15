@@ -12,9 +12,7 @@ def blackjack_score(hand)
   total = hand.sum
 
   # raise error if score is greater than 21
-  if total > 21
-    raise ArgumentError.new("The hand score is #{total} which is greater than 21")
-  end
+  does_it_bust(total)
 
   return total
 end
@@ -47,5 +45,11 @@ def valid_cards(hand)
     unless VALID_CARDS.include?card
       raise ArgumentError.new("#{card} is invalid")
     end
+  end
+end
+
+def does_it_bust(total)
+  if total > 21
+    raise ArgumentError.new("The hand score is #{total} which is greater than 21")
   end
 end

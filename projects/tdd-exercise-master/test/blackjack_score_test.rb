@@ -10,7 +10,6 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe 'Blackjack Score' do
   it 'can calculate the score for a pair of number cards' do
-
     # Arrange
     hand = [3, 4]
 
@@ -18,8 +17,7 @@ describe 'Blackjack Score' do
     score = blackjack_score(hand)
 
     # Assert <-  You do this part!
-    expect score.must_equal 7
-
+    expect(score).must_equal 7
   end
 
   it 'facecards have values calculated correctly' do
@@ -28,13 +26,12 @@ describe 'Blackjack Score' do
     hand2 = ['King', 'Queen']
 
     # Act
-    score_array1 = make_numeric_hand(hand1)
-    score_array2 = make_numeric_hand(hand2)
+    total1 = blackjack_score(hand1)
+    total2 = blackjack_score(hand2)
 
     # Assert
-    expect score_array1.must_equal [10, 10]
-    expect score_array2.must_equal [10, 10]
-
+    expect(total1).must_equal 20
+    expect(total2).must_equal 20
   end
 
   it 'calculates aces as 11 where it does not go over 21' do
@@ -42,11 +39,10 @@ describe 'Blackjack Score' do
     hand = [2, 4, 'Ace']
 
     # Act
-    score_array = make_numeric_hand(hand)
+    total = blackjack_score(hand)
 
     # Assert
-    expect score_array.must_equal([2, 4, 11])
-
+    expect(total).must_equal 17
   end
 
   it 'calculates aces as 1, if an 11 would cause the score to go over 21' do
@@ -54,11 +50,10 @@ describe 'Blackjack Score' do
     hand = [2, 9, 'Ace']
 
     # Act
-    score_array = make_numeric_hand(hand)
+    total = blackjack_score(hand)
     
     # Assert
-    expect score_array.must_equal([2, 9, 1])
-
+    expect(total).must_equal 12
   end
 
   it 'raises an ArgumentError for invalid cards' do
@@ -67,13 +62,8 @@ describe 'Blackjack Score' do
     hand2 = [2, 9, 'Hello']
 
     # Act/Assert
-    expect {
-      blackjack_score(hand1)
-    }.must_raise ArgumentError
-
-    expect {
-      blackjack_score(hand2)
-    }.must_raise ArgumentError
+    expect {blackjack_score(hand1)}.must_raise ArgumentError
+    expect {blackjack_score(hand2)}.must_raise ArgumentError
 
   end
 
@@ -82,9 +72,6 @@ describe 'Blackjack Score' do
     hand = [9, 9, 9]
 
     # Act/Assert
-    expect {
-      blackjack_score(hand)
-    }.must_raise ArgumentError
-
+    expect {blackjack_score(hand)}.must_raise ArgumentError
   end
 end
