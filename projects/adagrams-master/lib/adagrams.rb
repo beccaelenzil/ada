@@ -56,6 +56,7 @@ def uses_available_letters?(input, letters_in_hand)
       return false
     end
   end
+  
   return true
 end
 
