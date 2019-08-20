@@ -14,6 +14,8 @@ ms_marvels_catchphrase = ms_marvel.say_cool_speech
 batmans_catchphrase = batman.say_cool_speech
 sailor_moons_catchphrase = sailor_moon.say_cool_speech
 
-puts ms_marvels_catchphrase
-puts batmans_catchphrase
-puts sailor_moons_catchphrase
+# puts ms_marvels_catchphrase
+# puts batmans_catchphrase
+# puts sailor_moons_catchphrase
+
+puts ms_marvel.superhero_name = "Becca"
