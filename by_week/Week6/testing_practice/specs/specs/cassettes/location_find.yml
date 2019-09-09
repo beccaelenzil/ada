@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://us1.locationiq.com/v1/search.php?format=json&key=&q=Seattle
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Thu, 11 Jul 2019 17:51:16 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dfe668c21cbe2d6ae347008d208a418851562867476; expires=Fri, 10-Jul-20
+        17:51:16 GMT; path=/; domain=.locationiq.com; HttpOnly
+      X-Powered-By:
+      - LocationIQ
+      Access-Control-Allow-Origin:
+      - "*"
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4f4c9fdd3ad37983-SEA
+    body:
+      encoding: UTF-8
+      string: '{"error":"Invalid key"}'
+    http_version: 
+  recorded_at: Thu, 11 Jul 2019 17:52:49 GMT
+- request:
+    method: get
+    uri: https://us1.locationiq.com/v1/search.php?format=json&key=&q=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Thu, 11 Jul 2019 17:51:16 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=dd802464aa7a631205ef9ba867b754cff1562867476; expires=Fri, 10-Jul-20
+        17:51:16 GMT; path=/; domain=.locationiq.com; HttpOnly
+      X-Powered-By:
+      - LocationIQ
+      Access-Control-Allow-Origin:
+      - "*"
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 4f4c9fdeb888c979-SEA
+    body:
+      encoding: UTF-8
+      string: '{"error":"Invalid key"}'
+    http_version: 
+  recorded_at: Thu, 11 Jul 2019 17:52:49 GMT
+recorded_with: VCR 5.0.0

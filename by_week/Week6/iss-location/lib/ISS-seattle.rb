@@ -19,7 +19,7 @@ else
 end
 #=end
 
-=begin
+#=begin
 class IssPass
   URL = 'http://api.open-notify.org/iss-pass.json'
   class IssLocationError < StandardError; 
@@ -74,4 +74,4 @@ end
 # Run the program only if invoked directly from the command line
 main if __FILE__ == $0
 
-=end
+#=end
