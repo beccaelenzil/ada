@@ -1,0 +1,17 @@
+/* class */
+.page-title {
+    color: gray;
+    font-size: 2.5rem;
+  }
+
+.highlight {
+    color: gray;
+    background-color: yellow;
+}
+
+/* ID */
+#home-page-title {
+    color: teal;
+    font-size: 4rem;
+}
+

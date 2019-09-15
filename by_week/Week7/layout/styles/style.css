@@ -1,0 +1,43 @@
+/* class */
+.page-title {
+    color: gray;
+    font-size: 2.5rem;
+    border: black 1px solid;
+  }
+
+.highlight {
+    color: gray;
+    /*background-color: yellow;*/
+}
+/* ID */
+#home-page-title {
+    color: teal;
+    font-size: 4rem;
+}
+
+a[href*="github"] { 
+    color: purple; 
+}
+
+h1:hover { 
+    color: red; 
+}
+
+h1::selection {
+    color: yellow;
+    background-color: black;
+}
+
+h1, a, .orange {
+    background-color: orange;
+}
+/* layout */
+
+h1 {
+    
+}
+
+* {
+    border: green 3px solid;
+
+}
