@@ -22,11 +22,11 @@ no
 
 1. How would you add a new column of type `string` called `best_month`?
     - How do you create a new migration?
-rails generate migration add_to_hikes
+rails generate migration add_best_month_to_hikes
 
     - What goes in the migration file?
     
-    def change
+ def change
     # Rails loves both symbols and implicit parens
     add_column :hikes, :best_month, :string
   end
@@ -43,7 +43,7 @@ hike_list = Hike.all
 1. How would you search for the hike with ID 13 and store it in a variable named `hike`?
 
 hike = Hike.find(13)
-hie = Hike.where(id: 13)
+hike = Hike.where(id: 13)
 
     - There are two ways to do this! What is the other one?
 1. What happens when you use each of the previous two methods to search for a hike with ID 19?
@@ -79,7 +79,7 @@ Fortune Ponds | 13.0   | 2700                | 4700               | 3
 
 1. How would you build a new instance of the `Hike` model with the above data and store it in a local variable named `new_hike`, without saving it to the database?
 
-new_hike = Hike.create(name: "Fortune Ponds" length_miles: 13.0,	elevation_gain_feet: 2700, max_elevation_feet: 4700, rating: 3)
+new_hike = Hike.new(name: "Fortune Ponds" length_miles: 13.0,	elevation_gain_feet: 2700, max_elevation_feet: 4700, rating: 3)
 
 1. Once `new_hike` has been built, how would you save it to the database?
 
@@ -88,7 +88,7 @@ new_hike.save
 1. How would you accomplish the above two steps in one method call?
 
 create
-
+<!--  -->
 ### Updating Data
 
 1. Assume that hike #4 has been loaded into an local variable called `hike`:
