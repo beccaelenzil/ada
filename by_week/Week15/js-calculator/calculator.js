@@ -42,7 +42,20 @@ const calculator = function(error, result) {
   printEq(num1, num2, operation, solution)
   return solution
 }  
-
+//https://www.npmjs.com/package/prompt
+let schema = {
+  properties: {
+    num1: {
+      pattern: /[-.]?\d+\.?\d+/,
+      message: 'Must enter a number'
+    },
+    num2: {
+      pattern: /[-.]?\d*\.?\d*/,
+      message: 'Must enter a number'
+    },
+    operation: {    }
+  }
+}
 
 //start the prompt
 prompt.start();
@@ -51,13 +64,6 @@ prompt.start();
 //then call the function `calculator` with the results
 console.log('Enter two numbers and one of the following operations: add (+), subtract (-), multiply (*), divide (/)')
 
-let is_num;
-let result;
 
-do{
-  result = prompt('num1');
-  is_num = isNumber(result.num1) 
-}
-while(is_num === false)
-
+prompt.get(schema, calculator);
 
