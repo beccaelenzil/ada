@@ -45,21 +45,44 @@ list.forEach( function(element) {
 });
 */
 
-const sequence = [ 2, 5, 8, 11, 14 ]
-sequence.forEach( function(num) {
-  console.log(2*num+7);
-});
+// const sequence = [ 2, 5, 8, 11, 14 ]
+// sequence.forEach( function(num) {
+//   console.log(2*num+7);
+// });
 
-const animals =  ['puppies', 'meerkats', 'red pandas', 'cats']
+// const animals =  ['puppies', 'meerkats', 'red pandas', 'cats']
 
-animals.forEach( function(animal) {
-  console.log(`I am an amazing ${animal.slice(0,animal.length-1)}`);
-})
+// animals.forEach( function(animal) {
+//   console.log(`I am an amazing ${animal.slice(0,animal.length-1)}`);
+// })
 
+// let longest = ''
+// animals.forEach( function(animal) {
+//   if (animal.length > longest.length) {
+//     longest = animal
+//   }
+// })
+// console.log(`The longest animal name is ${longest.slice(0,longest.length-1)}`)
+
+// const list = ['Alice', 'Cooper', 'Maria', 'Alyokhina', 'Alicia', 'Keys'];
+
+// const foundElement = list.find( function(element) {
+//   return element == 'Becca'
+// });
+
+// if (foundElement != undefined) {
+//   console.log('I found Cooper!')
+// }
+
+  
+// console.log(foundElement)
+
+const animals = ['puppies', 'meerkats', 'red pandas', 'cats']
 let longest = ''
 animals.forEach( function(animal) {
-  if (animal.length > longest.length) {
+  if (animal.length > longest.length){
     longest = animal
   }
-})
-console.log(`The longest animal name is ${longest.slice(0,longest.length-1)}`)
+});
+
+console.log(`The longest animal name is ${longest}`)
